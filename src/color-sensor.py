@@ -1,4 +1,6 @@
 #!/usr/bin/env pybricks-micropython
+
+# pylint: disable=import-error
 from pybricks.hubs import EV3Brick
 from pybricks.ev3devices import (
     Motor,
@@ -12,6 +14,8 @@ from pybricks.parameters import Port, Stop, Direction, Button, Color
 from pybricks.tools import wait, StopWatch, DataLog
 from pybricks.robotics import DriveBase
 from pybricks.media.ev3dev import SoundFile, ImageFile, Font
+
+# pylint: enable=import-error
 
 
 def get_light_reflection(currentColorSensor: ColorSensor) -> int:
@@ -85,6 +89,8 @@ def calibrateColorSensor(
 
 
 """ Takes the LRI readings from both COLOR SENSORS, and stores them in a CSV file."""
+
+
 def calibrateColorSensors(
     currentEV3: EV3Brick,
     currentLeftColorSensor: ColorSensor,
@@ -106,6 +112,8 @@ def calibrateColorSensors(
 
 
 """ Gets all color calibration data"""
+
+
 def getAllColorCalibrationData(calibrationDataFileName: str):
 
     calibrationData = []
@@ -176,5 +184,3 @@ def getBlackLRIOfRightColorSensor(calData: []):
             break
 
     return blackLRI
-
-
