@@ -12,7 +12,7 @@ You may want to include this as a Git submodule, in which case you would use
 ```python
 from lib.src import color_sensor as colorSensor
 ```
-### API Docs
+## API Docs
 
 <a name="src.color_sensor"></a>
 # src.color\_sensor
