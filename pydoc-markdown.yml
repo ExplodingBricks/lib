@@ -12,12 +12,9 @@ renderer:
       source: README.md
     - title: API Documentation
       contents:
-        - '*'
+        - 'src*'
       name: docs
-  mkdocs_config:
-    mkdocs_config:
-      site_name: My Project
-      theme: material
+
 hooks:
   post-render:
     - "mv ./build/docs/content/docs.md README.md"
