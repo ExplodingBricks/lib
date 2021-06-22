@@ -20,7 +20,7 @@ def get_light_reflection(currentColorSensor: ColorSensor) -> int:
 
 # Calibrates the selected COLOR SENSOR by getting LRI readings from both White and Black areas
 # and store it in the CSV Data file
-def calibrate_color_SENSOR(
+def calibrateColorSensor(
     currentEV3: EV3Brick,
     currentColorSensor: ColorSensor,
     leftOrRight: str,
@@ -84,8 +84,8 @@ def calibrate_color_SENSOR(
     currentEV3.light.off()
 
 
-# Takes the LRI readings from both COLOR SENSORS, and stores them in a CSV file.☺ ☹
-def Calibrate_color_sensor_for_Robot(
+""" Takes the LRI readings from both COLOR SENSORS, and stores them in a CSV file."""
+def calibrateColorSensors(
     currentEV3: EV3Brick,
     currentLeftColorSensor: ColorSensor,
     currentRightColorSensor: ColorSensor,
@@ -93,24 +93,20 @@ def Calibrate_color_sensor_for_Robot(
 ):
 
     # Erases previous content and makes the file blank
-    with open(fileName, "w") as currCalFileName:
+    with open(fileName, "w"):
         pass
 
     # Takes the LRI readings from over the WHITE and BLACK areas by the Right COLOR SENSOR
-    calibrate_color_SENSOR(currentEV3, currentRightColorSensor, "right", fileName)
-    # Take a step back and wwwaaaaiiiitttt (:
+    calibrateColorSensor(currentEV3, currentRightColorSensor, "right", fileName)
     wait(1500)
 
     # Takes the LRI readings from over the WHITE and BLACK areas by the Left COLOR SENSOR
-    calibrate_color_SENSOR(currentEV3, currentLeftColorSensor, "left", fileName)
+    calibrateColorSensor(currentEV3, currentLeftColorSensor, "left", fileName)
     currentEV3.screen.draw_text(0, 40, "Crabs were successful")
 
 
-# You will be attacked by a beast who has the body of a wolf, the tail of a lion...
-# ...and the face of Donald Duck
-
-
-def get_all_color_calibration_data(calibrationDataFileName: str):
+""" Gets all color calibration data"""
+def getAllColorCalibrationData(calibrationDataFileName: str):
 
     calibrationData = []
 
@@ -131,7 +127,7 @@ def get_all_color_calibration_data(calibrationDataFileName: str):
 
 
 # Returns the reading of LRI by the left color sensor in the White Area
-def get_white_LRI_of_left_ColorSensor(calData: []):
+def getWhiteLRIOfLeftColorSensor(calData: []):
     whiteLRI = 90
     for currentCalTuple in calData:
         currentColorSensorPosition = currentCalTuple[0]
@@ -144,7 +140,7 @@ def get_white_LRI_of_left_ColorSensor(calData: []):
 
 
 # Returns the reading of LRI by the left color sensor in the Black Area
-def get_black_LRI_of_left_ColorSensor(calData: []):
+def getBlackLRIOfLeftColorSensor(calData: []):
     blackLRI = 90
     for currentCalTuple in calData:
         currentColorSensorPosition = currentCalTuple[0]
@@ -157,7 +153,7 @@ def get_black_LRI_of_left_ColorSensor(calData: []):
 
 
 # Returns the reading of LRI by the right color sensor in the White Area
-def get_white_LRI_of_right_ColorSensor(calData: []):
+def getWhiteLRIOfRightColorSensor(calData: []):
     whiteLRI = 90
     for currentCalTuple in calData:
         currentColorSensorPosition = currentCalTuple[0]
@@ -170,7 +166,7 @@ def get_white_LRI_of_right_ColorSensor(calData: []):
 
 
 # Returns the reading of LRI by the right color sensor in the Balcke Area
-def get_black_LRI_of_right_ColorSensor(calData: []):
+def getBlackLRIOfRightColorSensor(calData: []):
     blackLRI = 90
     for currentCalTuple in calData:
         currentColorSensorPosition = currentCalTuple[0]
@@ -182,29 +178,3 @@ def get_black_LRI_of_right_ColorSensor(calData: []):
     return blackLRI
 
 
-def funny_hellos(currentEV3: EV3Brick, currentColorSensor: ColorSensor):
-    # It takes some time for fonts to load from file, so it is best to only
-    # load them once at the beginning of the program like this:
-    tiny_font = Font(size=6)
-    big_font = Font(size=24, bold=True)
-    chinese_font = Font(size=24, lang="zh-cn")
-
-    currentEV3.screen.clear()
-
-    # Say hello
-    currentEV3.screen.print("Hello!")
-
-    # Say tiny hello
-    currentEV3.screen.set_font(tiny_font)
-    currentEV3.screen.print("hello")
-
-    # Say big hello
-    currentEV3.screen.set_font(big_font)
-    currentEV3.screen.print("HELLO")
-
-    # Say Chinese hello
-    currentEV3.screen.set_font(chinese_font)
-    currentEV3.screen.print("好你")
-
-    # Wait some time to look at the screen
-    wait(5000)
