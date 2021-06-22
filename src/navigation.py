@@ -28,6 +28,16 @@ def turnWithGyroSensorRampingDown(
     currentLeftMotor: Motor,
     initialTurnSpeed: float,
 ):
+    """Function to turn with the Gyro while ramping down
+
+    Args:
+        currentRobot (DriveBase): [description]
+        targetTurnAngle (float): [description]
+        currentGyro (GyroSensor): [description]
+        currentRightMotor (Motor): [description]
+        currentLeftMotor (Motor): [description]
+        initialTurnSpeed (float): [description]
+    """
     currentRobot.stop(Stop.BRAKE)
     startingAngle = currentGyro.angle()
     currentAngle = startingAngle
@@ -90,7 +100,15 @@ def turnWithPIDControlOfGyroSensor(
     currentRightMotor: Motor,
     currentLeftMotor: Motor,
 ):
+    """[summary]
 
+    Args:
+        currentRobot (DriveBase): [description]
+        targetTurnAngle (float): [description]
+        currentGyro (GyroSensor): [description]
+        currentRightMotor (Motor): [description]
+        currentLeftMotor (Motor): [description]
+    """
     # Parameters for PID gyro turning (optimized values for 90 degree clockwise turn: Kp=10.1,Ki=0.003, Kd=1.1)
     KP_VALUE = 10.1
     KI_VALUE = 0.003

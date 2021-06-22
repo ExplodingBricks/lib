@@ -19,17 +19,31 @@ from pybricks.media.ev3dev import SoundFile, ImageFile, Font
 
 
 def get_light_reflection(currentColorSensor: ColorSensor) -> int:
+    """Helper function for current reflection
+
+    Args:
+        currentColorSensor (ColorSensor): [description]
+
+    Returns:
+        int: The current reflection
+    """
     return currentColorSensor.reflection()
 
 
-# Calibrates the selected COLOR SENSOR by getting LRI readings from both White and Black areas
-# and store it in the CSV Data file
 def calibrateColorSensor(
     currentEV3: EV3Brick,
     currentColorSensor: ColorSensor,
     leftOrRight: str,
-    calFileName: str,
+    fileName: str,
 ):
+    """Calibrates the selected COLOR SENSOR by getting LRI readings from both White and Black areas and stores it in the CSV Data file. See calibrateColorSensors for a full calibration.
+
+    Args:
+        currentEV3 (EV3Brick): The current EV3 brick to be used
+        currentColorSensor (ColorSensor): The current color sensor to be used
+        leftOrRight (str): Whether to use the left or right color sensor for this calibration
+        fileName (str): Filename for calibration save
+    """
     # Gives text prompt to put the selected COLOR SENSOR over a White AREA.
     big_font = Font(size=20, bold=True)
     currentEV3.screen.clear()
@@ -73,7 +87,7 @@ def calibrateColorSensor(
 
     # Opens the Calibration CSV data file in append mode, and the file will be
     # automatically closed once the writing is complete
-    with open(calFileName, "a") as colorSensorCalibrationDataFile:
+    with open(fileName, "a") as colorSensorCalibrationDataFile:
 
         # Adds the new LRI readings to the Calibration CSV data file
         colorSensorCalibrationDataFile.write(
@@ -88,7 +102,6 @@ def calibrateColorSensor(
     currentEV3.light.off()
 
 
-""" Takes the LRI readings from both COLOR SENSORS, and stores them in a CSV file."""
 
 
 def calibrateColorSensors(
@@ -97,7 +110,14 @@ def calibrateColorSensors(
     currentRightColorSensor: ColorSensor,
     fileName: str,
 ):
+    """Takes the LRI readings from both COLOR SENSORS, and stores them in a CSV file.
 
+    Args:
+        currentEV3 (EV3Brick): The current EV3 brick to be used
+        currentLeftColorSensor (ColorSensor): The current left color sensor to be used
+        currentRightColorSensor (ColorSensor): The current right color sensor to be used
+        fileName (str): Filename for calibration save
+    """
     # Erases previous content and makes the file blank
     with open(fileName, "w"):
         pass
@@ -111,11 +131,17 @@ def calibrateColorSensors(
     currentEV3.screen.draw_text(0, 40, "Crabs were successful")
 
 
-""" Gets all color calibration data"""
 
 
 def getAllColorCalibrationData(calibrationDataFileName: str):
+    """Gets all color calibration data
 
+    Args:
+        calibrationDataFileName (str): Filename for calibration save
+
+    Returns:
+        [type]: Calibration data
+    """
     calibrationData = []
 
     # Opens Calibration Data File in READ-ONLY mode
@@ -136,6 +162,14 @@ def getAllColorCalibrationData(calibrationDataFileName: str):
 
 # Returns the reading of LRI by the left color sensor in the White Area
 def getWhiteLRIOfLeftColorSensor(calData: []):
+    """Returns the reading of LRI by the left color sensor in the White Area
+
+    Args:
+        calData ([type]): [description]
+
+    Returns:
+        White LRI
+    """
     whiteLRI = 90
     for currentCalTuple in calData:
         currentColorSensorPosition = currentCalTuple[0]
@@ -149,6 +183,14 @@ def getWhiteLRIOfLeftColorSensor(calData: []):
 
 # Returns the reading of LRI by the left color sensor in the Black Area
 def getBlackLRIOfLeftColorSensor(calData: []):
+    """Returns the reading of LRI by the left color sensor in the Black Area
+
+    Args:
+        calData ([type]): [description]
+
+    Returns:
+        Black LRI
+    """
     blackLRI = 90
     for currentCalTuple in calData:
         currentColorSensorPosition = currentCalTuple[0]
@@ -162,6 +204,14 @@ def getBlackLRIOfLeftColorSensor(calData: []):
 
 # Returns the reading of LRI by the right color sensor in the White Area
 def getWhiteLRIOfRightColorSensor(calData: []):
+    """Returns the reading of LRI by the right color sensor in the White Area
+
+    Args:
+        calData ([type]): [description]
+
+    Returns:
+        White LRI
+    """
     whiteLRI = 90
     for currentCalTuple in calData:
         currentColorSensorPosition = currentCalTuple[0]
@@ -174,7 +224,16 @@ def getWhiteLRIOfRightColorSensor(calData: []):
 
 
 # Returns the reading of LRI by the right color sensor in the Balcke Area
+
 def getBlackLRIOfRightColorSensor(calData: []):
+    """Returns the reading of LRI by the right color sensor in the Black Area
+
+    Args:
+        calData ([type]): [description]
+
+    Returns:
+        Black LRI
+    """
     blackLRI = 90
     for currentCalTuple in calData:
         currentColorSensorPosition = currentCalTuple[0]
