@@ -14,6 +14,44 @@ from lib.src import color_sensor as colorSensor
 ```
 ## API Docs
 
+<a name="src.navigation"></a>
+# src.navigation
+
+<a name="src.navigation.turnWithGyroSensorRampingDown"></a>
+#### turnWithGyroSensorRampingDown
+
+```python
+turnWithGyroSensorRampingDown(currentRobot: DriveBase, targetTurnAngle: float, currentGyro: GyroSensor, currentRightMotor: Motor, currentLeftMotor: Motor, initialTurnSpeed: float)
+```
+
+Function to turn with the Gyro while ramping down
+
+**Arguments**:
+
+- `currentRobot` _DriveBase_ - [description]
+- `targetTurnAngle` _float_ - [description]
+- `currentGyro` _GyroSensor_ - [description]
+- `currentRightMotor` _Motor_ - [description]
+- `currentLeftMotor` _Motor_ - [description]
+- `initialTurnSpeed` _float_ - [description]
+
+<a name="src.navigation.turnWithPIDControlOfGyroSensor"></a>
+#### turnWithPIDControlOfGyroSensor
+
+```python
+turnWithPIDControlOfGyroSensor(currentRobot: DriveBase, targetTurnAngle: float, currentGyro: GyroSensor, currentRightMotor: Motor, currentLeftMotor: Motor)
+```
+
+[summary]
+
+**Arguments**:
+
+- `currentRobot` _DriveBase_ - [description]
+- `targetTurnAngle` _float_ - [description]
+- `currentGyro` _GyroSensor_ - [description]
+- `currentRightMotor` _Motor_ - [description]
+- `currentLeftMotor` _Motor_ - [description]
+
 <a name="src.color_sensor"></a>
 # src.color\_sensor
 
@@ -28,7 +66,7 @@ Helper function for current reflection
 
 **Arguments**:
 
-- `currentColorSensor` _ColorSensor_ - [description]
+- `currentColorSensor` _ColorSensor_ - The current color sensor in use
   
 
 **Returns**:
@@ -96,7 +134,7 @@ Returns the reading of LRI by the left color sensor in the White Area
 
 **Arguments**:
 
-- `calData` _[type]_ - [description]
+- `calData` _tuple_ - Calibration data to use
   
 
 **Returns**:
@@ -114,7 +152,7 @@ Returns the reading of LRI by the left color sensor in the Black Area
 
 **Arguments**:
 
-- `calData` _[type]_ - [description]
+- `calData` _tuple_ - Calibration data to use
   
 
 **Returns**:
@@ -150,48 +188,10 @@ Returns the reading of LRI by the right color sensor in the Black Area
 
 **Arguments**:
 
-- `calData` _[type]_ - [description]
+- `calData` _tuple_ - Calibration data to use
   
 
 **Returns**:
 
   Black LRI
-
-<a name="src.navigation"></a>
-# src.navigation
-
-<a name="src.navigation.turnWithGyroSensorRampingDown"></a>
-#### turnWithGyroSensorRampingDown
-
-```python
-turnWithGyroSensorRampingDown(currentRobot: DriveBase, targetTurnAngle: float, currentGyro: GyroSensor, currentRightMotor: Motor, currentLeftMotor: Motor, initialTurnSpeed: float)
-```
-
-Function to turn with the Gyro while ramping down
-
-**Arguments**:
-
-- `currentRobot` _DriveBase_ - [description]
-- `targetTurnAngle` _float_ - [description]
-- `currentGyro` _GyroSensor_ - [description]
-- `currentRightMotor` _Motor_ - [description]
-- `currentLeftMotor` _Motor_ - [description]
-- `initialTurnSpeed` _float_ - [description]
-
-<a name="src.navigation.turnWithPIDControlOfGyroSensor"></a>
-#### turnWithPIDControlOfGyroSensor
-
-```python
-turnWithPIDControlOfGyroSensor(currentRobot: DriveBase, targetTurnAngle: float, currentGyro: GyroSensor, currentRightMotor: Motor, currentLeftMotor: Motor)
-```
-
-[summary]
-
-**Arguments**:
-
-- `currentRobot` _DriveBase_ - [description]
-- `targetTurnAngle` _float_ - [description]
-- `currentGyro` _GyroSensor_ - [description]
-- `currentRightMotor` _Motor_ - [description]
-- `currentLeftMotor` _Motor_ - [description]
 
