@@ -22,7 +22,7 @@ def get_light_reflection(currentColorSensor: ColorSensor) -> int:
     """Helper function for current reflection
 
     Args:
-        currentColorSensor (ColorSensor): [description]
+        currentColorSensor (ColorSensor): The current color sensor in use
 
     Returns:
         int: The current reflection
@@ -165,7 +165,7 @@ def getWhiteLRIOfLeftColorSensor(calData: []):
     """Returns the reading of LRI by the left color sensor in the White Area
 
     Args:
-        calData ([type]): [description]
+        calData (tuple): Calibration data to use
 
     Returns:
         White LRI
@@ -186,7 +186,7 @@ def getBlackLRIOfLeftColorSensor(calData: []):
     """Returns the reading of LRI by the left color sensor in the Black Area
 
     Args:
-        calData ([type]): [description]
+        calData (tuple): Calibration data to use
 
     Returns:
         Black LRI
@@ -229,7 +229,7 @@ def getBlackLRIOfRightColorSensor(calData: []):
     """Returns the reading of LRI by the right color sensor in the Black Area
 
     Args:
-        calData ([type]): [description]
+        calData (tuple): Calibration data to use
 
     Returns:
         Black LRI
