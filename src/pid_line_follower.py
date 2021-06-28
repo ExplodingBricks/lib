@@ -129,7 +129,7 @@ def followLinePIDSimplified(
             checkpointColorSensoR.reflection() <= TARGET_CHECKPOINT_LIGHT_REFLECTION
         ):
             print(
-                "PIDLineFollower.follow_Line_PID_simplified: target reached. current left motor angle=",
+                "pid_line_follower.followLinePIDSimplified: target reached. current left motor angle=",
                 currentLeftMotorAngle,
             )
             break
@@ -154,7 +154,7 @@ def followLinePIDSimplified(
     currentRobot.stop(Stop.BRAKE)
 
 
-def follow_Line_PID(
+def followLinePID(
     currentRobot: DriveBase,
     currentLeftMotor: Motor,
     currentGyro: GyroSensor,
@@ -336,7 +336,7 @@ def followLinePIDForPathDOS(
     currentRobot.stop(Stop.BRAKE)
 
 
-def drive_until_certain_gyro_angle(
+def driveUntilCertainGyroAngle(
     currentRobot: DriveBase,
     currentGyro: GyroSensor,
     driveSpeed: int,
@@ -376,7 +376,7 @@ def drive_until_certain_gyro_angle(
     print("drive_until_certain_gyro_angle: gyro angle=", currentGyro.angle())
 
 
-def turn_with_gyro_sensor_guidance_and_color_sensor(
+def turnWithGyroSensorGuidanceAndColorSensor(
     currentRobot: DriveBase,
     currentGyro: GyroSensor,
     turnAngle: int,
