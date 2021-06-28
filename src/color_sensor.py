@@ -46,9 +46,7 @@ def calibrateColorSensor(
     """
     # Gives text prompt to put the selected COLOR SENSOR over a White AREA.
     big_font = Font(size=20, bold=True)
-    printInstructions(
-        currentEV3, big_font, leftOrRight, "sensor over WHITE"
-    )
+    printInstructions(currentEV3, big_font, leftOrRight, "sensor over WHITE")
 
     # Waits till any buttons on the brick are pressed
     while True:
@@ -62,9 +60,7 @@ def calibrateColorSensor(
     whiteReflection = currentColorSensor.reflection()
     currentEV3.light.off()
 
-    printInstructions(
-        currentEV3, big_font, leftOrRight, "sensor over BLACK"
-    )
+    printInstructions(currentEV3, big_font, leftOrRight, "sensor over BLACK")
 
     wait(1500)
     # Waits until a button is pressed on the brick
@@ -97,14 +93,13 @@ def calibrateColorSensor(
     )
     currentEV3.light.off()
 
+
 def printInstructions(currentEV3, big_font, leftOrRight, arg3):
     currentEV3.screen.clear()
     currentEV3.screen.set_font(big_font)
     currentEV3.screen.draw_text(0, 30, "Place " + leftOrRight + " color")
     currentEV3.screen.draw_text(0, 50, arg3)
     currentEV3.screen.draw_text(0, 70, "Press any button..")
-
-
 
 
 def calibrateColorSensors(
@@ -132,8 +127,6 @@ def calibrateColorSensors(
     # Takes the LRI readings from over the WHITE and BLACK areas by the Left COLOR SENSOR
     calibrateColorSensor(currentEV3, currentLeftColorSensor, "left", fileName)
     currentEV3.screen.draw_text(0, 40, "Crabs were successful")
-
-
 
 
 def getAllColorCalibrationData(calibrationDataFileName: str):
@@ -164,11 +157,11 @@ def getAllColorCalibrationData(calibrationDataFileName: str):
 
 
 def getLRIOfColorSensor(calData: [], side: str, color: str):
-    """Returns the reading of LRI 
+    """Returns the reading of LRI
 
     Args:
         calData ([]): Calibration data to be read
-        side (str): `right` or `left` 
+        side (str): `right` or `left`
         color (str): `black` or `white`
 
     Returns:

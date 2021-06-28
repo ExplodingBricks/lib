@@ -56,8 +56,7 @@ def turnWithGyroSensorRampingDown(
 
         # Speed ramping down according to cosine curve (from 0 degree to 90 degree, or maxSpeed (initialSpeed * cos(0)), to zero speed (initialSpeed * cos(90)))
         adjustedAngle = (abs(currentTurnAngle) / targetTurnAngle) * 90
-        currentTurnSpeed = initialTurnSpeed * \
-            math.cos(math.radians(adjustedAngle))
+        currentTurnSpeed = initialTurnSpeed * math.cos(math.radians(adjustedAngle))
 
         elapsed_time = (time.time() - start_time) * 1000
         print(
@@ -212,6 +211,7 @@ def simpleTurnWithGyro(
 
     currentRobot.stop(Stop.BRAKE)
     print("turn_with_gyro_sensor_guidance: gyro angle=", currentGyro.angle())
+
 
 def variedSpeedTurnWithGyro(
     currentRobot: DriveBase,

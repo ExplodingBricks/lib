@@ -12,9 +12,4 @@ from lib.src import color_sensor as colorSensor
 ```
 ## API Docs
 """
-__all__ = [
-    "color_sensor",
-    "navigation",
-    "pid_line_follower",
-    "nice_print"
-]
+__all__ = ["color_sensor", "navigation", "pid_line_follower", "nice_print"]
