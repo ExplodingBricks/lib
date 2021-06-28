@@ -14,14 +14,17 @@ from lib.src import color_sensor as colorSensor
 ```
 ## API Docs
 
+<a name="src.nice_print"></a>
+# src.nice\_print
+
 <a name="src.color_sensor"></a>
 # src.color\_sensor
 
-<a name="src.color_sensor.get_light_reflection"></a>
-#### get\_light\_reflection
+<a name="src.color_sensor.getLightReflection"></a>
+#### getLightReflection
 
 ```python
-get_light_reflection(currentColorSensor: ColorSensor) -> int
+getLightReflection(currentColorSensor: ColorSensor) -> int
 ```
 
 Helper function for current reflection
@@ -85,77 +88,25 @@ Gets all color calibration data
 
 - `[type]` - Calibration data
 
-<a name="src.color_sensor.getWhiteLRIOfLeftColorSensor"></a>
-#### getWhiteLRIOfLeftColorSensor
+<a name="src.color_sensor.getLRIOfColorSensor"></a>
+#### getLRIOfColorSensor
 
 ```python
-getWhiteLRIOfLeftColorSensor(calData: [])
+getLRIOfColorSensor(calData: [], side: str, color: str)
 ```
 
-Returns the reading of LRI by the left color sensor in the White Area
+Returns the reading of LRI
 
 **Arguments**:
 
-- `calData` _tuple_ - Calibration data to use
+- `calData` _[]_ - Calibration data to be read
+- `side` _str_ - `right` or `left`
+- `color` _str_ - `black` or `white`
   
 
 **Returns**:
 
-  White LRI
-
-<a name="src.color_sensor.getBlackLRIOfLeftColorSensor"></a>
-#### getBlackLRIOfLeftColorSensor
-
-```python
-getBlackLRIOfLeftColorSensor(calData: [])
-```
-
-Returns the reading of LRI by the left color sensor in the Black Area
-
-**Arguments**:
-
-- `calData` _tuple_ - Calibration data to use
-  
-
-**Returns**:
-
-  Black LRI
-
-<a name="src.color_sensor.getWhiteLRIOfRightColorSensor"></a>
-#### getWhiteLRIOfRightColorSensor
-
-```python
-getWhiteLRIOfRightColorSensor(calData: [])
-```
-
-Returns the reading of LRI by the right color sensor in the White Area
-
-**Arguments**:
-
-- `calData` _[type]_ - [description]
-  
-
-**Returns**:
-
-  White LRI
-
-<a name="src.color_sensor.getBlackLRIOfRightColorSensor"></a>
-#### getBlackLRIOfRightColorSensor
-
-```python
-getBlackLRIOfRightColorSensor(calData: [])
-```
-
-Returns the reading of LRI by the right color sensor in the Black Area
-
-**Arguments**:
-
-- `calData` _tuple_ - Calibration data to use
-  
-
-**Returns**:
-
-  Black LRI
+- `[int]` - The stored LRI
 
 <a name="src.navigation"></a>
 # src.navigation
@@ -263,11 +214,11 @@ followLinePIDSimplified(currentRobot: DriveBase, currentLeftMotor: Motor, lineFo
 - `targetMotorAngle` _int_ - [description]
 - `ignoreCheckPoint` _Boolean_ - [description]
 
-<a name="src.pid_line_follower.follow_Line_PID"></a>
-#### follow\_Line\_PID
+<a name="src.pid_line_follower.followLinePID"></a>
+#### followLinePID
 
 ```python
-follow_Line_PID(currentRobot: DriveBase, currentLeftMotor: Motor, currentGyro: GyroSensor, lineFollowingColorSensor: ColorSensor, checkpointColorSensoR: ColorSensor, followLeftEdge: Boolean, currentDriveSpeed: int, targetMotorAngle: int, targetLRI: int, targetCheckPointLRI: int)
+followLinePID(currentRobot: DriveBase, currentLeftMotor: Motor, currentGyro: GyroSensor, lineFollowingColorSensor: ColorSensor, checkpointColorSensoR: ColorSensor, followLeftEdge: Boolean, currentDriveSpeed: int, targetMotorAngle: int, targetLRI: int, targetCheckPointLRI: int)
 ```
 
 [summary]
@@ -306,11 +257,11 @@ followLinePIDForPathDOS(currentRobot: DriveBase, currentLeftMotor: Motor, curren
 - `targetMotorAngle` _int_ - [description]
 - `targetMotorAngleAfterSharpTurn` _int_ - [description]
 
-<a name="src.pid_line_follower.drive_until_certain_gyro_angle"></a>
-#### drive\_until\_certain\_gyro\_angle
+<a name="src.pid_line_follower.driveUntilCertainGyroAngle"></a>
+#### driveUntilCertainGyroAngle
 
 ```python
-drive_until_certain_gyro_angle(currentRobot: DriveBase, currentGyro: GyroSensor, driveSpeed: int, driveSteering: int, turnAngle: float, isClockwise: Boolean)
+driveUntilCertainGyroAngle(currentRobot: DriveBase, currentGyro: GyroSensor, driveSpeed: int, driveSteering: int, turnAngle: float, isClockwise: Boolean)
 ```
 
 [summary]
@@ -324,11 +275,11 @@ drive_until_certain_gyro_angle(currentRobot: DriveBase, currentGyro: GyroSensor,
 - `turnAngle` _float_ - [description]
 - `isClockwise` _Boolean_ - [description]
 
-<a name="src.pid_line_follower.turn_with_gyro_sensor_guidance_and_color_sensor"></a>
-#### turn\_with\_gyro\_sensor\_guidance\_and\_color\_sensor
+<a name="src.pid_line_follower.turnWithGyroSensorGuidanceAndColorSensor"></a>
+#### turnWithGyroSensorGuidanceAndColorSensor
 
 ```python
-turn_with_gyro_sensor_guidance_and_color_sensor(currentRobot: DriveBase, currentGyro: GyroSensor, turnAngle: int, turnTime: int, turnRadius: float, isClockwise: Boolean, targetColorSensor: ColorSensor, targetLRI: float)
+turnWithGyroSensorGuidanceAndColorSensor(currentRobot: DriveBase, currentGyro: GyroSensor, turnAngle: int, turnTime: int, turnRadius: float, isClockwise: Boolean, targetColorSensor: ColorSensor, targetLRI: float)
 ```
 
 [summary]
