@@ -14,10 +14,10 @@ from pybricks.parameters import Port, Stop, Direction, Button, Color
 from pybricks.tools import wait, StopWatch, DataLog
 from pybricks.robotics import DriveBase
 from pybricks.media.ev3dev import SoundFile, ImageFile
-from myblocks import PIDLineFollower
-import time, math
 
 # pylint: enable=import-error
+import time
+import math
 
 
 def turnWithGyroSensorRampingDown(
@@ -56,7 +56,8 @@ def turnWithGyroSensorRampingDown(
 
         # Speed ramping down according to cosine curve (from 0 degree to 90 degree, or maxSpeed (initialSpeed * cos(0)), to zero speed (initialSpeed * cos(90)))
         adjustedAngle = (abs(currentTurnAngle) / targetTurnAngle) * 90
-        currentTurnSpeed = initialTurnSpeed * math.cos(math.radians(adjustedAngle))
+        currentTurnSpeed = initialTurnSpeed * \
+            math.cos(math.radians(adjustedAngle))
 
         elapsed_time = (time.time() - start_time) * 1000
         print(
@@ -73,7 +74,8 @@ def turnWithGyroSensorRampingDown(
         ):  # turn closewise, and the outer wheel (which is the left wheel) needs to turn faster for tighter turn. Reason Unknown.
             currentLeftMotor.run(currentTurnSpeed)
             currentRightMotor.run(-currentTurnSpeed)
-        else:  # turn counter-clockwise, and the outer wheel (which is the right wheel) needs to turn slower for tighter turn. Reason unknown.
+        # turn counter-clockwise, and the outer wheel (which is the right wheel) needs to turn slower for tighter turn. Reason unknown.
+        else:
             currentRightMotor.run(currentTurnSpeed)
             currentLeftMotor.run(-currentTurnSpeed)
 
@@ -147,7 +149,8 @@ def turnWithPIDControlOfGyroSensor(
         ):  # turn closewise, and the outer wheel (which is the left wheel) needs to turn faster for tighter turn. Reason Unknown.
             currentLeftMotor.run(PIDValue)
             currentRightMotor.run(-PIDValue / 2)
-        else:  # turn counter-clockwise, and the outer wheel (which is the right wheel) needs to turn slower for tighter turn. Reason unknown.
+        # turn counter-clockwise, and the outer wheel (which is the right wheel) needs to turn slower for tighter turn. Reason unknown.
+        else:
             currentRightMotor.run(-PIDValue / 2)
             currentLeftMotor.run(PIDValue)
 
@@ -165,3 +168,47 @@ def turnWithPIDControlOfGyroSensor(
         ", starting gyro=",
         startingAngle,
     )
+
+
+def simpleTurnWithGyro(
+    currentRobot: DriveBase,
+    currentGyro: GyroSensor,
+    turnAngle: int,
+    turnTime: int,
+    turnRadius: float,
+    isClockwise: Boolean,
+):
+    """[summary]
+
+    Args:
+        currentRobot (DriveBase): [description]
+        currentGyro (GyroSensor): [description]
+        turnAngle (int): [description]
+        turnTime (int): [description]
+        turnRadius (float): [description]
+        isClockwise (Boolean): [description]
+    """
+    currentRobot.stop(Stop.BRAKE)
+
+    if isClockwise:
+        steering = turnAngle * (1000 / turnTime)
+    else:
+        steering = -(turnAngle * (1000 / turnTime))
+    speed = 2 * math.pi * (turnRadius) * (turnAngle / 360) * (1000 / turnTime)
+
+    gyroAngleBeforeTurn = currentGyro.angle()
+    if isClockwise:
+        gyroAngleAfterTurn = gyroAngleBeforeTurn + turnAngle
+    else:
+        gyroAngleAfterTurn = gyroAngleBeforeTurn - turnAngle
+    print("turn_with_gyro_sensor_guidance: speed=", speed, "steering=", steering)
+    currentRobot.drive(speed, steering)
+    while True:
+        currentGyroAngle = currentGyro.angle()
+        if isClockwise and currentGyro.angle() >= gyroAngleAfterTurn:
+            break
+        if not (isClockwise) and currentGyro.angle() <= gyroAngleAfterTurn:
+            break
+
+    currentRobot.stop(Stop.BRAKE)
+    print("turn_with_gyro_sensor_guidance: gyro angle=", currentGyro.angle())

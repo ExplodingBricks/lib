@@ -14,5 +14,6 @@ from lib.src import color_sensor as colorSensor
 """
 __all__ = [
     "color_sensor",
-    "navigation"
+    "navigation",
+    "pid_line_follower"
 ]
