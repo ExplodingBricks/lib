@@ -137,7 +137,7 @@ def turnWithPIDControlOfGyroSensor(
         pastError = currentError
 
         currentError = targetTurnAngle - currentTurnAngle
-        integral = integral + currentError
+        integral += currentError
         derivative = currentError - pastError
         PIDValue = currentError * KP_VALUE + integral * KI_VALUE + derivative * KD_VALUE
 

@@ -53,7 +53,7 @@ def followLinePIDForCertainMotorRotatingDegree(
     followLinePIDSimplified(
         currentRobot,
         currentLeftMotor,
-        lineFollowingColorSensor,
+        currentCheckPointColorSensor,
         currentCheckPointColorSensor,
         followLeftEdge,
         currentDriveSpeed,
@@ -144,7 +144,7 @@ def followLinePIDSimplified(
         else:
             # follow the right edge of the line
             currentError = TARGET_LIGHT_REFLECTION - currrentLightReflection
-        integral = integral + currentError
+        integral += currentError
         derivative = currentError - pastError
         PIDValue = currentError * KP_VALUE + integral * KI_VALUE + derivative * KD_VALUE
 
@@ -213,7 +213,7 @@ def followLinePID(
         if currentLeftMotorAngle > (targetMotorAngle - 100) and (
             isNotCloseToTargetMotorAngle
         ):
-            currentDriveSpeed = currentDriveSpeed / 2
+            currentDriveSpeed /= 2
             isNotCloseToTargetMotorAngle = False
             print("Felix the right motor's angle is ", currentLeftMotorAngle)
 
@@ -227,7 +227,7 @@ def followLinePID(
         else:
             # follow the right edge of the line
             currentError = TARGET_LIGHT_REFLECTION - currrentLightReflection
-        integral = integral + currentError
+        integral += currentError
         derivative = currentError - pastError
         PIDValue = currentError * KP_VALUE + integral * KI_VALUE + derivative * KD_VALUE
 
@@ -296,12 +296,12 @@ def followLinePIDForPathDOS(
         if currentLeftMotorAngle > (targetMotorAngle - 100) and (
             isNotCloseToTargetMotorAngle
         ):
-            currentDriveSpeed = currentDriveSpeed / 2
+            currentDriveSpeed /= 2
             isNotCloseToTargetMotorAngle = False
         if (currentLeftMotorAngle > targetMotorAngleAfterSharpTurn) and (
             isBeforeSharpTurn
         ):
-            currentDriveSpeed = currentDriveSpeed * 3
+            currentDriveSpeed *= 3
             isBeforeSharpTurn = False
         currrentLightReflection = lineFollowingColorSensor.reflection()
         pastError = currentError
@@ -312,7 +312,7 @@ def followLinePIDForPathDOS(
         else:
             # follow the right edge of the line
             currentError = TARGET_LIGHT_REFLECTION - currrentLightReflection
-        integral = integral + currentError
+        integral += currentError
         derivative = currentError - pastError
         PIDValue = currentError * KP_VALUE + integral * KI_VALUE + derivative * KD_VALUE
 

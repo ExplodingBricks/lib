@@ -18,7 +18,7 @@ from pybricks.media.ev3dev import SoundFile, ImageFile, Font
 # pylint: enable=import-error
 
 
-def get_light_reflection(currentColorSensor: ColorSensor) -> int:
+def getLightReflection(currentColorSensor: ColorSensor) -> int:
     """Helper function for current reflection
 
     Args:
@@ -46,11 +46,10 @@ def calibrateColorSensor(
     """
     # Gives text prompt to put the selected COLOR SENSOR over a White AREA.
     big_font = Font(size=20, bold=True)
-    currentEV3.screen.clear()
-    currentEV3.screen.set_font(big_font)
-    currentEV3.screen.draw_text(0, 30, "Place " + leftOrRight + " color")
-    currentEV3.screen.draw_text(0, 50, "sensor over WHITE")
-    currentEV3.screen.draw_text(0, 70, "Press any button..")
+    printInstructions(
+        currentEV3, big_font, leftOrRight, "sensor over WHITE"
+    )
+
     # Waits till any buttons on the brick are pressed
     while True:
         if currentEV3.buttons.pressed():
@@ -63,12 +62,9 @@ def calibrateColorSensor(
     whiteReflection = currentColorSensor.reflection()
     currentEV3.light.off()
 
-    # Gives a text prompt to put the selected COLOR SENSOR over a Black AREA
-    currentEV3.screen.clear()
-    currentEV3.screen.set_font(big_font)
-    currentEV3.screen.draw_text(0, 30, "Place " + leftOrRight + " color")
-    currentEV3.screen.draw_text(0, 50, "sensor over BLACK")
-    currentEV3.screen.draw_text(0, 70, "Press any button..")
+    printInstructions(
+        currentEV3, big_font, leftOrRight, "sensor over BLACK"
+    )
 
     wait(1500)
     # Waits until a button is pressed on the brick
@@ -100,6 +96,13 @@ def calibrateColorSensor(
         0, 40, "Calibration of " + leftOrRight + " color sensor successful"
     )
     currentEV3.light.off()
+
+def printInstructions(currentEV3, big_font, leftOrRight, arg3):
+    currentEV3.screen.clear()
+    currentEV3.screen.set_font(big_font)
+    currentEV3.screen.draw_text(0, 30, "Place " + leftOrRight + " color")
+    currentEV3.screen.draw_text(0, 50, arg3)
+    currentEV3.screen.draw_text(0, 70, "Press any button..")
 
 
 
@@ -160,86 +163,27 @@ def getAllColorCalibrationData(calibrationDataFileName: str):
     return calibrationData
 
 
-# Returns the reading of LRI by the left color sensor in the White Area
-def getWhiteLRIOfLeftColorSensor(calData: []):
-    """Returns the reading of LRI by the left color sensor in the White Area
+def getLRIOfColorSensor(calData: [], side: str, color: str):
+    """Returns the reading of LRI 
 
     Args:
-        calData (tuple): Calibration data to use
+        calData ([]): Calibration data to be read
+        side (str): `right` or `left` 
+        color (str): `black` or `white`
 
     Returns:
-        White LRI
+        [int]: The stored LRI
     """
-    whiteLRI = 90
+    LRI = 90
+    if color == "black":
+        pos = 2
+    elif color == "white":
+        pos = 1
     for currentCalTuple in calData:
         currentColorSensorPosition = currentCalTuple[0]
         loweredCurrentColorSensorPosition = currentColorSensorPosition.lower()
-        if "left" in loweredCurrentColorSensorPosition:
-            whiteLRI = int(currentCalTuple[1])
+        if side in loweredCurrentColorSensorPosition:
+            LRI = int(currentCalTuple[pos])
             break
 
-    return whiteLRI
-
-
-# Returns the reading of LRI by the left color sensor in the Black Area
-def getBlackLRIOfLeftColorSensor(calData: []):
-    """Returns the reading of LRI by the left color sensor in the Black Area
-
-    Args:
-        calData (tuple): Calibration data to use
-
-    Returns:
-        Black LRI
-    """
-    blackLRI = 90
-    for currentCalTuple in calData:
-        currentColorSensorPosition = currentCalTuple[0]
-        loweredCurrentColorSensorPosition = currentColorSensorPosition.lower()
-        if "left" in loweredCurrentColorSensorPosition:
-            blackLRI = int(currentCalTuple[2])
-            break
-
-    return blackLRI
-
-
-# Returns the reading of LRI by the right color sensor in the White Area
-def getWhiteLRIOfRightColorSensor(calData: []):
-    """Returns the reading of LRI by the right color sensor in the White Area
-
-    Args:
-        calData ([type]): [description]
-
-    Returns:
-        White LRI
-    """
-    whiteLRI = 90
-    for currentCalTuple in calData:
-        currentColorSensorPosition = currentCalTuple[0]
-        loweredCurrentColorSensorPosition = currentColorSensorPosition.lower()
-        if "right" in loweredCurrentColorSensorPosition:
-            whiteLRI = int(currentCalTuple[1])
-            break
-
-    return whiteLRI
-
-
-# Returns the reading of LRI by the right color sensor in the Balcke Area
-
-def getBlackLRIOfRightColorSensor(calData: []):
-    """Returns the reading of LRI by the right color sensor in the Black Area
-
-    Args:
-        calData (tuple): Calibration data to use
-
-    Returns:
-        Black LRI
-    """
-    blackLRI = 90
-    for currentCalTuple in calData:
-        currentColorSensorPosition = currentCalTuple[0]
-        loweredCurrentColorSensorPosition = currentColorSensorPosition.lower()
-        if "right" in loweredCurrentColorSensorPosition:
-            blackLRI = int(currentCalTuple[2])
-            break
-
-    return blackLRI
+    return LRI
