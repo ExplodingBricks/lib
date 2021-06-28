@@ -164,6 +164,42 @@ simpleTurnWithGyro(currentRobot: DriveBase, currentGyro: GyroSensor, turnAngle: 
 - `turnRadius` _float_ - [description]
 - `isClockwise` _Boolean_ - [description]
 
+<a name="src.navigation.variedSpeedTurnWithGyro"></a>
+#### variedSpeedTurnWithGyro
+
+```python
+variedSpeedTurnWithGyro(currentRobot: DriveBase, currentGyro: GyroSensor, turnAngle: int, turnTime: int, turnRadius: float, isClockwise: Boolean)
+```
+
+[summary]
+
+**Arguments**:
+
+- `currentRobot` _DriveBase_ - [description]
+- `currentGyro` _GyroSensor_ - [description]
+- `turnAngle` _int_ - [description]
+- `turnTime` _int_ - [description]
+- `turnRadius` _float_ - [description]
+- `isClockwise` _Boolean_ - [description]
+
+<a name="src.navigation.trueTurn"></a>
+#### trueTurn
+
+```python
+trueTurn(currentRobot: DriveBase, currentGyro: GyroSensor, targetAngle: int, turnTime: int, turnRadius: float, isClockwise: Boolean)
+```
+
+[summary]
+
+**Arguments**:
+
+- `currentRobot` _DriveBase_ - [description]
+- `currentGyro` _GyroSensor_ - [description]
+- `targetAngle` _int_ - [description]
+- `turnTime` _int_ - [description]
+- `turnRadius` _float_ - [description]
+- `isClockwise` _Boolean_ - [description]
+
 <a name="src.pid_line_follower"></a>
 # src.pid\_line\_follower
 
