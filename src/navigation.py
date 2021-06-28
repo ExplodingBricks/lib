@@ -212,3 +212,100 @@ def simpleTurnWithGyro(
 
     currentRobot.stop(Stop.BRAKE)
     print("turn_with_gyro_sensor_guidance: gyro angle=", currentGyro.angle())
+
+def variedSpeedTurnWithGyro(
+    currentRobot: DriveBase,
+    currentGyro: GyroSensor,
+    turnAngle: int,
+    turnTime: int,
+    turnRadius: float,
+    isClockwise: Boolean,
+):
+    """[summary]
+
+    Args:
+        currentRobot (DriveBase): [description]
+        currentGyro (GyroSensor): [description]
+        turnAngle (int): [description]
+        turnTime (int): [description]
+        turnRadius (float): [description]
+        isClockwise (Boolean): [description]
+    """
+    currentRobot.stop(Stop.BRAKE)
+
+    if isClockwise:
+        steering = turnAngle * (1000 / turnTime)
+    else:
+        steering = -(turnAngle * (1000 / turnTime))
+    speed = 2 * math.pi * (turnRadius) * (turnAngle / 360) * (1000 / turnTime)
+
+    gyroAngleBeforeTurn = currentGyro.angle()
+    if isClockwise:
+        gyroAngleAfterTurn = gyroAngleBeforeTurn + turnAngle
+    else:
+        gyroAngleAfterTurn = gyroAngleBeforeTurn - turnAngle
+    print("turn_with_gyro_sensor_guidance: speed=", speed, "steering=", steering)
+    currentRobot.drive(speed, steering)
+    while True:
+        currentGyroAngle = currentGyro.angle()
+
+        if isClockwise and currentGyro.angle() >= gyroAngleAfterTurn:
+            break
+        if not (isClockwise) and currentGyro.angle() <= gyroAngleAfterTurn:
+            break
+
+    currentRobot.stop(Stop.BRAKE)
+    print("turn_with_gyro_sensor_guidance: gyro angle=", currentGyro.angle())
+
+
+def trueTurn(
+    currentRobot: DriveBase,
+    currentGyro: GyroSensor,
+    targetAngle: int,
+    turnTime: int,
+    turnRadius: float,
+    isClockwise: Boolean,
+):
+    """[summary]
+
+    Args:
+        currentRobot (DriveBase): [description]
+        currentGyro (GyroSensor): [description]
+        targetAngle (int): [description]
+        turnTime (int): [description]
+        turnRadius (float): [description]
+        isClockwise (Boolean): [description]
+    """
+    halfTarget = 0.5 * targetAngle
+    startingGyroAngle = currentGyro.angle()
+    currentRobot.stop(Stop.BRAKE)
+    moveBool = True
+
+    if isClockwise:
+        steering = targetAngle * (1000 / turnTime)
+    else:
+        steering = -(targetAngle * (1000 / turnTime))
+    speed = 2 * math.pi * (turnRadius) * (targetAngle / 360) * (1000 / turnTime)
+
+    gyroAngleBeforeTurn = currentGyro.angle()
+    if isClockwise:
+        gyroAngleAfterTurn = gyroAngleBeforeTurn + targetAngle
+    else:
+        gyroAngleAfterTurn = gyroAngleBeforeTurn - targetAngle
+    print("turn_with_gyro_sensor_guidance: speed=", speed, "steering=", steering)
+    currentRobot.drive(speed, steering)
+
+    while True:
+        currentGyroAngle = currentGyro.angle()
+        angleTurnSoFar = currentGyroAngle - startingGyroAngle
+
+        if angleTurnSoFar >= targetAngle:
+            break
+
+        if angleTurnSoFar >= halfTarget and moveBool:
+            moveBool = False
+            steering = 0.5 * steering
+            print("Angle turn so far = ", angleTurnSoFar, " steering = ", steering)
+            currentRobot.drive(speed, steering)
+
+    currentRobot.stop(Stop.BRAKE)
