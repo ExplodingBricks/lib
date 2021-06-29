@@ -16,7 +16,7 @@ from pybricks.robotics import DriveBase
 from pybricks.media.ev3dev import SoundFile, ImageFile
 
 # pylint: enable=import-error
-
+from src import nice_print
 import math
 
 
@@ -127,8 +127,8 @@ def followLinePIDSimplified(
         if (not ignoreCheckPoint) and (
             checkpointColorSensoR.reflection() <= TARGET_CHECKPOINT_LIGHT_REFLECTION
         ):
-            print(
-                "pid_line_follower.followLinePIDSimplified: target reached. current left motor angle=",
+            nice_print.nicePrint(
+                "target reached. current left motor angle=",
                 currentLeftMotorAngle,
             )
             break
@@ -214,7 +214,7 @@ def followLinePID(
         ):
             currentDriveSpeed /= 2
             isNotCloseToTargetMotorAngle = False
-            print("Felix the right motor's angle is ", currentLeftMotorAngle)
+            print("Felix the left motor's angle is ", currentLeftMotorAngle)
 
         # (=^._.^=) FAT CAT
         currrentLightReflection = lineFollowingColorSensor.reflection()

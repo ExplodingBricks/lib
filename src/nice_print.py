@@ -1,5 +1,7 @@
 import inspect
 
 
-def nicePrint(text=""):
-    print(inspect.currentframe().f_back.f_code.co_names[0] + ": " + text)
+def nicePrint(*argv):
+    """Helper function to print with caller name. Accepts infinite args to be printed.
+    """
+    print(str(inspect.currentframe().f_back.f_code.co_name) + ":", *argv)
